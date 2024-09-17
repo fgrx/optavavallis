@@ -1,0 +1,28 @@
+---
+import { Image } from "astro:assets";
+import Logo from "../../assets/img/logo.png"
+import Btn from "../../components/vue/Btn.vue";
+---
+
+<section>
+    <div class="md:flex  my-24 items-center justify-center">
+        <div class="md:mx-4">
+            <Image src={Logo} class="mx-auto w-68" height="300" format="webp" alt="logo des thérapeutes de Optava Vallis">
+        </div>
+
+        <div class="text-center md:text-left  md:mx-4 mt-6 mb-16">
+            <h1 class="hidden text-6xl uppercase md:text-8xl my-2 text-black">Optava Vallis</h1>
+            <h2 class="text-6xl md:text-6xl my-2 text-black">Cabinets de thérapeutes</h2>
+            <p class="text-2xl my-2">Cabinets de thérapeutes multidisciplines à Optevoz (Nord-Isère)</p>
+            <div class="text-center md:text-left">
+                <a
+                  target="blank"
+                  href="https://maps.app.goo.gl/rpR79EcrKhqVzvNV7"
+                  ><Btn>Situer sur Google maps</Btn></a
+                >
+              </div>
+        
+        </div>
+    </div>
+
+<section>

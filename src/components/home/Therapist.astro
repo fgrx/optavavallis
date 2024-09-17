@@ -1,0 +1,54 @@
+---
+import { Image } from "astro:assets";
+import Btn from "../../components/vue/Btn.vue"
+
+const { therapist:therapistObject }=Astro.props
+
+const {data:therapist}=therapistObject
+
+const images = import.meta.glob("../../assets/img/*");
+
+function checkOddOrEven(num:number) {
+    return num % 2 === 0 ? 'md:flex-row-reverse' : '';
+}
+
+let imageBackground:Promise<{ default: ImageMetadata; }>;
+if(therapist.imageBackground){
+  const imageToFind=therapist.imageBackground.replace("../../","../")
+  const imageFound = images[imageToFind]();
+  imageBackground = imageFound as Promise<{ default: ImageMetadata; }>;
+}
+
+let imagePortrait:Promise<{ default: ImageMetadata; }>;
+if(therapist.imagePortrait){
+  const imageToFind=therapist.imagePortrait.replace("../../","../")
+  const imageFound = images[imageToFind]();
+  imagePortrait = imageFound as Promise<{ default: ImageMetadata; }>;
+}
+
+const color = `bg-${therapist.color}`
+
+---
+<section>
+    <div class={`${checkOddOrEven(therapist.order)} ${color} container mx-auto md:flex mt-8 mb-20 md:items-center`} >
+        <div class="basis-1/2">
+            {
+                ()=>{
+                    if(imageBackground){
+                        return <Image  src={imageBackground} height="600" format="webp" alt="Thérapie Mosaic" />
+                    }
+                }
+            }
+        </div>
+
+
+        <div class="basis-1/2 text-light px-4 py-8 md:px-16">
+            <h2 class="text-4xl md:text-4xl pb-2">{therapist.title}</h2>
+            <h3 class="text-2xl pb-2">avec {therapist.name}</h3>
+            <p>{therapist.subtitle}</p>
+            <p>{therapist.description}</p>
+            </p>
+            <div class="text-center"><a href="/therapie-mosaic"><Btn color="light" textColor="primary">En savoir plus</Btn></a></div>
+        </div>
+    </div>
+</section>
