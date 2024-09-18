@@ -26,11 +26,8 @@ let imageBanner:Promise<{ default: ImageMetadata; }>;
 
 if(imgSrc){
   const images = import.meta.glob("../assets/img/*");
-  console.log('>>>>> images list',images)
   const imageToFind=imgSrc.replace("../../","../")
-  console.log("=====image to find",imageToFind)
   const imageFound = images[imageToFind]();
-console.log("******imageFound",imageFound)
   imageBanner = imageFound as Promise<{ default: ImageMetadata; }>;
 }
 
@@ -44,7 +41,7 @@ console.log("******imageFound",imageFound)
             {
                 ()=>{
                 if(imageBanner){
-                    return <div class="h-96"><Image class="object-cover w-full h-full" src={imageBanner}  format="webp" width="1400" height="400" alt="illustration de l'article" /></div>
+                    return <div class="h-96"><Image class="object-cover rounded-sm w-full h-full" src={imageBanner}  format="webp" width="1400" height="400" alt="illustration de l'article" /></div>
                 }
                 }
             }
