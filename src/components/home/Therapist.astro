@@ -19,13 +19,6 @@ if(therapist.imageBackground){
   imageBackground = imageFound as Promise<{ default: ImageMetadata; }>;
 }
 
-let imagePortrait:Promise<{ default: ImageMetadata; }>;
-if(therapist.imagePortrait){
-  const imageToFind=therapist.imagePortrait.replace("../../","../")
-  const imageFound = images[imageToFind]();
-  imagePortrait = imageFound as Promise<{ default: ImageMetadata; }>;
-}
-
 const color = `bg-${therapist.color}`
 const url = `/therapeutes/${therapistObject.slug}`
 ---
