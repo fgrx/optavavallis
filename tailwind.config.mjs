@@ -27,6 +27,8 @@ module.exports = {
     },
   },
   safelist: [
+    { pattern: /bg-./ },
+    { pattern: /text-./ },
     "bg-primary",
     "bg-primaryMedium",
     "bg-primaryLight",

@@ -1,5 +1,17 @@
 [
   {
+    "title": "Hypnothérapeute",
+    "url": "/hypnotherapeute"
+  },
+  {
+    "title": "Psychologue",
+    "url": "/psychologue"
+  },
+  {
+    "title": "Cabinet",
+    "url": "/cabinet"
+  },
+  {
     "title": "Mentions légales",
     "url": "/mentions-legales",
     "display": "hide-for-large"

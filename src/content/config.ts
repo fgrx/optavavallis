@@ -9,7 +9,7 @@ const therapeutesCollection = defineCollection({
         description: z.string(),
         imageBackground: z.string().optional(),
         imagePortrait: z.string().optional(),
-        telephone: z.string().optional(),
+        phone: z.string().optional(),
         mail: z.string().optional(),
         website: z.string().optional(),
         order: z.number(),

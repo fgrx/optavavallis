@@ -1,0 +1,132 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Image from "astro/components/Image.astro";
+import Btn from "../../components/vue/Btn.vue"
+
+export const getStaticPaths = (async() => {
+ const pages = await Astro.glob("../../content/**/*.md*") as any[];
+
+  return pages.map((page) => {
+    const slug =page.frontmatter.slug as string
+
+    return{
+        params: {
+        slug,
+        },
+        props: {
+        page,
+        }
+    };    
+}) ;
+
+});
+
+const { Content } = Astro.props.page;
+const { title, name, website, imageBackground, imagePortrait, phone } = Astro.props.page.frontmatter;
+
+const images = import.meta.glob("../../assets/img/*");
+
+let imageBackgroundSrc:Promise<{ default: ImageMetadata; }>;
+
+if(imageBackground){
+  const imageToFind=imageBackground.replace("../../","../")
+  const imageFound = images[imageToFind]();
+  imageBackgroundSrc = imageFound as Promise<{ default: ImageMetadata; }>;
+}
+
+let imagePortraitSrc:Promise<{ default: ImageMetadata; }>;
+if(imagePortrait){
+  const imageToFind=imagePortrait.replace("../../","../")
+  const imageFound = images[imageToFind]();
+  imagePortraitSrc = imageFound as Promise<{ default: ImageMetadata; }>;
+}
+---
+
+<Layout title={title}>
+  <article>
+
+    <div class="container md:flex items-end mx-auto px-2 py-6">
+      <div class="md:absolute bg-white pr-6 py-6 rounded">
+          <h1 class="text-5xl">{title}</h1>
+      </div>
+        {
+            ()=>{
+                if(imageBackground){
+                    return <div class="h-96 w-full h-full"><Image class="object-cover w-full h-full" src={imageBackgroundSrc}  format="webp" width="1400" height="400" alt="illustration de l'article" /></div>
+                }
+            }
+        }
+    </div>
+
+    <div class="md:flex container mx-auto px-2">
+        <div class="basis-3/4 md:pr-20">
+            <Content />
+        </div>
+
+        <div class="basis-1/4 md:-mt-12 md:text-center ">
+            <aside>
+
+                <div class="md:hidden mb-2">
+                    <h2 class="text-3xl">Votre thérapeute :</h2>
+                    <span class="text-2xl">{name}</span>
+                </div>
+
+                {
+                    ()=>{
+                        if(imagePortrait){
+                            return <div class=" md:h-64 md:w-64  h-80 w-80 w-full h-full mx-auto  "><Image class=" border-white border-2 rounded-full object-cover w-full h-full" src={imagePortraitSrc}  format="webp" width="500" height="500" alt="illustration de l'article" /></div>
+                        }
+                    }
+                }
+
+                <div class="hidden md:contents">
+                    <h2 class="text-3xl">Votre thérapeute :</h2>
+                    <span class="text-2xl">{name}</span>
+                </div>
+
+                <h2 class="text-3xl md:mt-12 ">Prendre rendez-vous</h2>
+        
+                {
+                    ()=>{
+                        if(website){
+                            return(
+                                <div class="pb-6">
+                                    <a  href={website} target="blank">
+                                        <Btn>Site internet</Btn>
+                                    </a>
+                                </div>
+                            )
+                        }
+                    }       
+                }
+
+                {
+                    ()=>{
+                        if(phone){
+                            return(
+                                <div class="py-4">
+                                    <a href=`tel:${phone}` target="blank">
+                                        <span class="text-2xl">📞 Téléphone</span> <br/>
+                                        {phone}
+                                        <br />
+
+                                        <Btn>Téléphoner</Btn>
+                                    </a>
+                                </div>
+                            )
+                        }
+                    }       
+                }
+
+                </div>
+
+            </aside>
+        </div>
+        
+    </div>
+
+
+      
+
+  </article>
+</Layout>
