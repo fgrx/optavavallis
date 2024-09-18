@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Image from "astro/components/Image.astro";
 
 export const getStaticPaths = (async() => {
-    const pages = await Astro.glob("../content/**/*.md*") as any[];
+    const pages = await Astro.glob("../content/pages/*.md*") as any[];
 
     return pages.map((page) => {
         const slug =page.frontmatter.slug as string

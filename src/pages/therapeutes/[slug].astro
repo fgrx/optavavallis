@@ -4,7 +4,7 @@ import Image from "astro/components/Image.astro";
 import Btn from "../../components/vue/Btn.vue"
 
 export const getStaticPaths = (async() => {
- const pages = await Astro.glob("../../content/**/*.md*") as any[];
+ const pages = await Astro.glob("../../content/therapeutes/*.md*") as any[];
 
   return pages.map((page) => {
     const slug =page.frontmatter.slug as string
