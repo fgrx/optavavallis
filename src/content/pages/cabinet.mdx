@@ -1,4 +1,35 @@
 ---
-slug: "Cabinets"
-title: "Cabinets"
+slug: "cabinet"
+title: "Cabinets de thérapeutes"
+imgSrc: "../../assets/img/cabinet.jpg"
 ---
+
+import Btn from "../../components/vue/Btn.vue";
+import Image from "astro/components/Image.astro";
+import Cabinet2 from "../../assets/img/cabinet2.jpg";
+
+<div class="md:flex">
+
+    <div class="basis-2/3">
+        ## Adresse
+
+        Les cabinet se situent à l'adresse suivante :
+
+        314 rue Philippe Tassier<br />
+        38460 Optevoz
+
+
+        <a target="blank" href="https://maps.app.goo.gl/rpR79EcrKhqVzvNV7">
+        <Btn>Situer sur Google maps</Btn>
+        </a>
+
+        Un grand parking est disponible pour se garer (en face de l'école d'Optevoz)
+    </div>
+
+    <div class="basis-1/3">
+        <aside>
+            <Image src={Cabinet2} class="mt-10 rounded-md" format="webp" width="600" alt="photo du cabinet d'hypnose et de psychothérapie"/>
+        </aside>
+    </div>
+
+</div>

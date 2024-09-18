@@ -1,0 +1,52 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Image from "astro/components/Image.astro";
+
+export const getStaticPaths = (async() => {
+    const pages = await Astro.glob("../content/**/*.md*") as any[];
+
+    return pages.map((page) => {
+        const slug =page.frontmatter.slug as string
+
+        return{
+            params: {
+            slug,
+            },
+            props: {
+            page,
+            }
+        };    
+    }) ;
+});
+
+const { Content } = Astro.props.page;
+const { title, imgSrc } = Astro.props.page.frontmatter;
+
+let imageBanner:Promise<{ default: ImageMetadata; }>;
+
+if(imgSrc){
+  const images = import.meta.glob("../assets/img/*");
+  const imageToFind=imgSrc.replace("../../","../")
+  const imageFound = images[imageToFind]();
+  imageBanner = imageFound as Promise<{ default: ImageMetadata; }>;
+}
+
+---
+
+<Layout title={title}>
+    <article>
+        <div class="container mx-auto px-2 py-6">
+            <h1 class="text-6xl uppercase mb-4">{title}</h1>
+            
+            {
+                ()=>{
+                if(imageBanner){
+                    return <div class="h-96"><Image class="object-cover w-full h-full" src={imageBanner}  format="webp" width="1400" height="400" alt="illustration de l'article" /></div>
+                }
+                }
+            }
+
+            <Content />
+        </div>
+    </article>
+</layout>
