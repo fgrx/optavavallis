@@ -26,6 +26,7 @@ let imageBanner:Promise<{ default: ImageMetadata; }>;
 
 if(imgSrc){
   const images = import.meta.glob("../assets/img/*");
+  console.log('>>>>>',images)
   const imageToFind=imgSrc.replace("../../","../")
   const imageFound = images[imageToFind]();
   imageBanner = imageFound as Promise<{ default: ImageMetadata; }>;
