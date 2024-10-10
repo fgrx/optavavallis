@@ -19,6 +19,7 @@ module.exports = {
         menuLight: "#b0cf76",
         menu: "##016e76",
         hypno: "#97490d",
+        osteo: "#029996",
         psy: "#075985",
       },
       height: {
