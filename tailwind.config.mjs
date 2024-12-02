@@ -21,6 +21,7 @@ module.exports = {
         hypno: "#97490d",
         osteo: "#029996",
         psy: "#075985",
+        naturo: "#a7aa08",
       },
       height: {
         banner: "40rem",
